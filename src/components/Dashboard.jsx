@@ -8,12 +8,12 @@ const Dashboard = () => {
   const [docs, setDocs] = useState([]);
   const [selectedTag, setSelectedTag] = useState(null);
   const navigate = useNavigate();
-  const [admin, setAdmit] = useState(false)
-  const [log, setLog] = useState(false)
+  const [admin,setAdmit]=useState(false)
+  const [log,setLog]=useState(false)
 
   // Fetch all documents
   useEffect(() => {
-    axios.get("https://gemini-8w55.onrender.com/doclist")
+    axios.get("http://localhost:5000/doclist")
       .then((res) => setDocs(res.data))
       .catch((err) => console.log("Error fetching docs:", err));
   }, []);
@@ -29,36 +29,36 @@ const Dashboard = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Do you really want to delete this document?")) return;
     try {
-      await axios.delete(`https://gemini-8w55.onrender.com/deletedoc/${id}`);
+      await axios.delete(`http://localhost:5000/deletedoc/${id}`);
       setDocs(docs.filter((d) => d._id !== id));
     } catch (err) {
       console.log("Error while deleting:", err);
     }
   };
 
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
+  useEffect(()=>{
+    auth.onAuthStateChanged((user)=>{
+      if(user){
         setLog(true)
-        setAdmit(user.uid === "jb1RaFHOJshdl9EVaAJtTky6zYx1")
-      } else {
+        setAdmit(user.uid==="jb1RaFHOJshdl9EVaAJtTky6zYx1")
+      }else{
         setLog(false)
         setAdmit(false)
         navigate("/login")
       }
     })
-  }, [])
-
+  },[])
   return (
     <div>
       <Navbar />
 
-      {/* Tag filter */}
+      {/* Tag filter chips */}
       <div className="flex flex-wrap gap-2 mb-4 px-6">
         <button
           onClick={() => setSelectedTag(null)}
-          className={`px-3 py-1 rounded-full border transition ${selectedTag === null ? "bg-blue-500 text-white" : "bg-gray-200"
-            }`}
+          className={`px-3 py-1 rounded-full border transition ${
+            selectedTag === null ? "bg-blue-500 text-white" : "bg-gray-200"
+          }`}
         >
           All
         </button>
@@ -66,8 +66,9 @@ const Dashboard = () => {
           <button
             key={i}
             onClick={() => setSelectedTag(tag)}
-            className={`px-3 py-1 rounded-full border transition ${selectedTag === tag ? "bg-blue-500 text-white" : "bg-gray-200"
-              }`}
+            className={`px-3 py-1 rounded-full border transition ${
+              selectedTag === tag ? "bg-blue-500 text-white" : "bg-gray-200"
+            }`}
           >
             #{tag}
           </button>
@@ -103,7 +104,7 @@ const Dashboard = () => {
               <span>By: {document.createdBy}</span>
             </div>
 
-            {admin && (<div className="flex justify-between mt-2">
+           {admin && (<div className="flex justify-between mt-2">
               <button
                 className="font-semibold bg-blue-400 px-3 py-1 rounded-md"
                 onClick={() => navigate(`/adddoc/${document._id}`)}

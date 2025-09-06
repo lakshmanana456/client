@@ -9,7 +9,8 @@ const Documents = () => {
 
   // fetch documents from backend
   useEffect(() => {
-    fetch("/api/documents").then((res) => res.json())
+    fetch("/api/documents")
+      .then((res) => res.json())
       .then((data) => setDocuments(data))
       .catch((err) => console.error(err));
   }, []);
@@ -52,6 +53,7 @@ const Documents = () => {
 
   return (
     <div className="p-6">
+      {/* Create Document Form */}
       <form
         onSubmit={handleSave}
         className="bg-white shadow-lg rounded-2xl p-6 mb-6"

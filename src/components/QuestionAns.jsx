@@ -16,7 +16,7 @@ const QuestionAns = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await axios.post("https://gemini-8w55.onrender.com/questionans", { question });
+            const res = await axios.post("http://localhost:5000/questionans", { question });
             setAnswer(res.data.answer);
             setQuestion("")
         } catch (err) {
