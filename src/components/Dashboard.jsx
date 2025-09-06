@@ -13,7 +13,7 @@ const Dashboard = () => {
 
   // Fetch all documents
   useEffect(() => {
-    axios.get("http://localhost:5000/doclist")
+    axios.get("https://gemini-8w55.onrender.com/doclist")
       .then((res) => setDocs(res.data))
       .catch((err) => console.log("Error fetching docs:", err));
   }, []);
@@ -29,7 +29,7 @@ const Dashboard = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Do you really want to delete this document?")) return;
     try {
-      await axios.delete(`http://localhost:5000/deletedoc/${id}`);
+      await axios.delete(`https://gemini-8w55.onrender.com/deletedoc/${id}`);
       setDocs(docs.filter((d) => d._id !== id));
     } catch (err) {
       console.log("Error while deleting:", err);

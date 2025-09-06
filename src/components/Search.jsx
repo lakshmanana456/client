@@ -25,7 +25,7 @@ const Search = () => {
 
   const handleSearch = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/search?title=${searchDoc}`);
+      const res = await axios.get(`https://gemini-8w55.onrender.com/search?title=${searchDoc}`);
       setResults(res.data);
       setSearchDoc("")
     } catch (err) {

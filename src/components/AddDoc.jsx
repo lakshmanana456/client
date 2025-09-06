@@ -19,7 +19,7 @@ const AddDocs = () => {
   // If editing, fetch document by id
   useEffect(() => {
     if (id) {
-      axios.get(`http://localhost:5000/adddoc/${id}`)
+      axios.get(`https://gemini-8w55.onrender.com/adddoc/${id}`)
         .then((res) => setDoc(res.data))
         .catch((err) => console.log("Error fetching doc:", err));
     }
@@ -37,7 +37,7 @@ const AddDocs = () => {
   const handleGenerate = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/generateSummary", {
+      const res = await axios.post("https://gemini-8w55.onrender.com/generateSummary", {
         content: doc.content,
       });
       setDoc({ ...doc,
@@ -63,11 +63,11 @@ const resetForm = () => {
     try {
       if (id) {
         // update
-        await axios.put(`http://localhost:5000/updatedoc/${id}`, doc);
+        await axios.put(`https://gemini-8w55.onrender.com/updatedoc/${id}`, doc);
         toast.success("updated successfully" )
       } else {
         // add
-        await axios.post("http://localhost:5000/addnewdoc", doc);
+        await axios.post("https://gemini-8w55.onrender.com/addnewdoc", doc);
         toast.success("New Document added")
       }
 
