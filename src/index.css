@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#emailInput{
+    border: solid black 1px;
+}
+
+#passInput{
+    border: solid black 1px;
+
+}
+*{
+    
+    @media screen and (max-width:900px){
+        font-size: 15px;
+    }
+
+   
+}
+
+*{
+    @media screen and (max-width:600px){
+        font-size: 13px;
+    }
+
+   
+}
